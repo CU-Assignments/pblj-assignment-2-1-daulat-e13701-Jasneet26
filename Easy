@@ -1,0 +1,64 @@
+import java.util.*;
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+    Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+    public String toString() {
+        return "ID: " + id + ", Name: " + name + ", Salary: " + salary;
+    }
+}
+
+public class EmployeeManager {
+    static List<Employee> employees = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("1. Add 2. Update 3. Remove 4. Search 5. Exit");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1 -> addEmployee();
+                case 2 -> updateEmployee();
+                case 3 -> removeEmployee();
+                case 4 -> searchEmployee();
+                case 5 -> System.exit(0);
+            }
+        }
+    }
+    static void addEmployee() {
+        System.out.print("Enter ID, Name, Salary: ");
+        employees.add(new Employee(sc.nextInt(), sc.next(), sc.nextDouble()));
+    }
+    static void updateEmployee() {
+        System.out.print("Enter ID: ");
+        int id = sc.nextInt();
+        for (Employee e : employees) {
+            if (e.id == id) {
+                System.out.print("Enter new Name, Salary: ");
+                e.name = sc.next();
+                e.salary = sc.nextDouble();
+                return;
+            }
+        }
+    }
+    static void removeEmployee() {
+        System.out.print("Enter ID: ");
+        int id = sc.nextInt();
+        employees.removeIf(e -> e.id == id);
+    }
+    static void searchEmployee() {
+        System.out.print("Enter ID: ");
+        int id = sc.nextInt();
+        for (Employee e : employees) {
+            if (e.id == id) {
+                System.out.println(e);
+                return;
+            }
+        }
+    }
+}
