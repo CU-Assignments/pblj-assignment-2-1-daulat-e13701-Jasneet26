@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Card {
+    String symbol;
+    String value;
+    Card(String symbol, String value) {
+        this.symbol = symbol;
+        this.value = value;
+    }
+    public String toString() {
+        return "[" + symbol + " - " + value + "]";
+    }
+}
+
+public class CardCollection {
+    static Collection<Card> cards = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("1. Add Card 2. Find Cards by Symbol 3. Exit");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1 -> addCard();
+                case 2 -> findCards();
+                case 3 -> System.exit(0);
+            }
+        }
+    }
+    static void addCard() {
+        System.out.print("Enter Symbol and Value: ");
+        cards.add(new Card(sc.next(), sc.next()));
+    }
+    static void findCards() {
+        System.out.print("Enter Symbol: ");
+        String symbol = sc.next();
+        for (Card c : cards) {
+            if (c.symbol.equals(symbol)) {
+                System.out.println(c);
+            }
+        }
+    }
+}
